@@ -24,7 +24,11 @@ pub enum BufferContent {
 }
 
 pub trait MsgSocket {
+    /// Similar to UdpSocket::recv_from, but only read the content of
+    /// one datagram.
     fn recvmsg(&self, buf: &mut [u8]) -> io::Result<(BufferContent, SocketAddr)>;
+    /// Similar to UdpSocket::send_to, but sends the buffer in a
+    /// single datagram.
     fn sendmsg(&self, buf: &[u8], addr: &SocketAddr) -> io::Result<usize>;
 }
 
